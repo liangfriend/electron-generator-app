@@ -1,0 +1,28 @@
+{
+  "include": [
+    "resources/*",
+  ],
+  "file": [
+    "electron.vite.config.ts"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "module": "CommonJS",
+    "target": "ES6",
+    "outDir": "./dist",
+    "paths": {
+      "@/": [
+        "src/"
+      ],
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.web.json"
+    }
+  ]
+}
