@@ -1,4 +1,4 @@
-![image](https://github.com/liangfriend/electron-generator-app/assets/106008210/c392cc74-78bb-4f52-abdb-118eb5acd6ad)## 介绍
+## 介绍
 基于electron的windows系统应用生成器。
 对于单个开发者而言，只需掌握基础web开发知识配合此生成器就可以独自完成桌面软件的开发。完全不用考虑工程架构方面的问题。
 对于多人团队而言，提供了统一规范，包括函数流通逻辑规范、命名逻辑规范、统一工具函数（比如日志打印log.ts）规范，避免神通广大的各位出现千人千面现象。
