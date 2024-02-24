@@ -3,20 +3,21 @@ import fs from 'fs'
 import fsExtra from 'fs-extra'
 import path from "path";
 // 打开文件对话框
-export function openFileDialog(win:BrowserWindow) {
-  dialog.showOpenDialog(win, {
+export async function openFileDialog(win:BrowserWindow,config:{extensions?:string[]}):Promise<string> {
+    const result=await dialog.showOpenDialog(win,  {
     properties: ['openFile'],
     filters: [
-      { name: 'All Files', extensions: ['*'] }
+      { name: 'All Files', extensions: config.extensions??['*'] }
     ]
-  }).then(result => {
-    console.log(result.filePaths); // 用户选择的文件路径
-  }).catch(err => {
-    console.log(err);
-  });
+    })
+    const filePath = result.filePaths[0];
+    let content=''
+    content= fs.readFileSync(filePath, 'utf-8');
+    console.log(content)
+    return content
 }
 // 用于文件生成
-export function createFile(fileName, content, targetPath) {
+export function createFile(fileName:string, content:string, targetPath:string) {
     if (!targetPath.endsWith("/")) {
         targetPath += "/";
     }
@@ -64,11 +65,11 @@ export async function openDirectoryDialog(win: BrowserWindow): Promise<string> {
 }
 
 //拷贝文件
-export function copyFileWithProgress(source, target, progressCallback) {
+export function copyFileWithProgress(source: string, target: string, progressCallback:object) {
     const readStream = fs.createReadStream(source);
     const writeStream = fs.createWriteStream(target);
     let totalBytesCopied = 0;
-    let totalBytes;
+    let totalBytes:number;
 
     // 获取源文件的大小
     fs.stat(source, (err, stats) => {
@@ -81,6 +82,7 @@ export function copyFileWithProgress(source, target, progressCallback) {
 
     // 监听数据流传输事件
     readStream.on('data', chunk => {
+        // !不可以这么回调，要发送到ipcMain.on中去
         totalBytesCopied += chunk.length;
         const progress = totalBytesCopied / totalBytes;
         progressCallback(progress); // 回调函数通知拷贝进度
@@ -109,7 +111,7 @@ export function copyFileWithProgress(source, target, progressCallback) {
  * @param {string} sourceDir 源目录路径
  * @param {string} targetDir 目标目录路径
  */
-export async function copyDirectoryWithProgress(sourceDir, targetDir,progressCallback) {
+export async function copyDirectoryWithProgress(sourceDir:string, targetDir:string,progressCallback:object) {
     try {
         let totalFiles = 0;
         let copiedFiles = 0;
@@ -126,6 +128,7 @@ export async function copyDirectoryWithProgress(sourceDir, targetDir,progressCal
             
             // 进度回调((
             filter: (src, dest) => {
+                // !不可以这么回调，要发送到ipcMain.on中去
                 progressCallback(src, dest)
                 console.log(`拷贝文件：${src} 到 ${dest}`);
                 copiedFiles++;

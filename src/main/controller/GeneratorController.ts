@@ -1,8 +1,10 @@
+import { AwilixContainer } from "awilix";
 import { ipcMain } from "electron";
 
 class GeneratorController {
+    
     generatorService
-    constructor(data) {
+    constructor(data:any) {
         this.generatorService = data.generatorService;
         this.init();
     }
@@ -11,7 +13,7 @@ class GeneratorController {
         //
        this.generatorStart()
     }
-    generatorStart() {
+    generatorStart():void {
         ipcMain.handle('generatorStart', (event,data) => {
        
             this.generatorService.generatorStart(data)

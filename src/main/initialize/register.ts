@@ -9,7 +9,7 @@ import StudentService from "../service/StudentService";
 import StudentModel from "../models/StudentModel";
 import SystemController from "../controller/SystemController";
 import SystemRepository from "../repositories/SystemRepository";
-import SystemService from "../service/SystemRepository";
+import SystemService from "../service/SystemService";
 import GeneratorService from "../service/GeneratorService";
 import GeneratorController from "../controller/GeneratorController";
 import GeneratorRepository from "../repositories/GeneratorRepository";

@@ -1,12 +1,15 @@
 {
   "include": [
-    "resources/*",
+    "src/main/*.ts",
+    "src/main/**/*.ts",
+    // "src/main/**/**/*",
   ],
   "file": [
     "electron.vite.config.ts"
   ],
   "compilerOptions": {
     "composite": true,
+    "strict":true,
     "baseUrl": ".",
     "module": "CommonJS",
     "target": "ES6",

@@ -2,12 +2,13 @@
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "include": [
     "src/main/*.ts",
-    "src/main/**/*",
-    "resources/*",
+    "src/main/**/*.ts",
+ 
     // "src/main/**/**/*",
   ],
   "compilerOptions": {
     "composite": true,
+    "strict": true,
     "types": [
       "electron-vite/node"
     ],

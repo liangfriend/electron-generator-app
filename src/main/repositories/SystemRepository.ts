@@ -7,17 +7,22 @@ import path from "path";
 
 class SystemRepository {
     
-    constructor(data) {
+    constructor(data:any) {
         //
     }
 
-    async getPath() {
+     getPath() {
         const win=getWindow('main')
-        const targetPath = await openDirectoryDialog(win)
+        const targetPath =  openDirectoryDialog(win)
         return targetPath
     
     }
-
+     getFileContent() {
+        const win=getWindow('main')
+        const content =  openFileDialog(win, {})
+        console.log(content)
+        return content
+    }
 }
 
 export default SystemRepository;

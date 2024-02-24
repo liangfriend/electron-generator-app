@@ -1,9 +1,12 @@
 import { ipcRenderer } from "electron"
 
 const systemApi = {
-    getPath: async (): Promise<boolean> => {
-      return await ipcRenderer.invoke('getPath')
-    },
+    getPath:  (): Promise<boolean> => {
+      return  ipcRenderer.invoke('getPath')
+  },
+  getFileContent:  (): Promise<boolean> => {
+      return  ipcRenderer.invoke('getFileContent')
+  },
 
   
 }

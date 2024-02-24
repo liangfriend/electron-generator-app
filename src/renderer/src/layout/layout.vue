@@ -55,13 +55,25 @@ import { ref, onMounted } from "vue";
 import {routes} from '@renderer/router'
 import {useRouter,useRoute} from 'vue-router'
 import {_layout} from '@renderer/config/constant'
+import {defaultPageLabel} from '@renderer/config/constant'
 const menuItems = ref([]);
 const router=useRouter()
 
 const activeIndex=ref('')
 const loadMenuItems = () => {
-    
-  routes.forEach((route) => {
+
+    //排序
+  const sort={"introduce":1,"projectGenerator":2,"pageGenerator":3,"formGenerator":4}
+  
+  routes.sort((a,b)=>{
+    console.log("排序",a)
+    const sortA=sort[a.meta?.key]
+    const sortB=sort[b.meta?.key]
+    if(!sortA || !sortB){
+      return 1
+    }
+    return sortA-sortB
+  }).forEach((route) => {
     if (route.name) {
       menuItems.value.push({
         index: route.meta.key,
@@ -71,7 +83,7 @@ const loadMenuItems = () => {
       });
     }
   });
-  activeIndex.value='projectGenerator'
+  activeIndex.value=defaultPageLabel
 };
 
 const handleMenuItemClick = (menuItem) => {

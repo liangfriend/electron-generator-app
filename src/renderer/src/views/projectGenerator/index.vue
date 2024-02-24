@@ -101,6 +101,7 @@
           </el-button>
           <el-button
             type="primary"
+            @click="importSqliteFile"
           >
             导入sqlite文件
           </el-button>
@@ -216,6 +217,8 @@
 import { ref, onMounted } from 'vue';
 import {_mainTemplateTypeOption,_preloadTemplateTypeOption,_rendererTemplateTypeOption,_viewIndexTemplateTypeOption,_projectTemplateTypeOption} from '@renderer/config/constant'
 import {d} from '@renderer/utils/common'
+import {SQLTransOBJ} from '@renderer/utils/SQLTransOBJ'
+
 import viewIndexDefault from '@static/images/viewIndex-default.png'
 import viewIndexHongKai from '@static/images/viewIndex-hongkai.png'
 
@@ -313,7 +316,11 @@ const addTable = () => {
     ]
   });
 };
+const importSqliteFile= async ()=>{
+  const content= await window.api.getFileContent()
 
+  config.value.data=SQLTransOBJ(content)
+}
 const removeTable = (tableIndex: number) => {
   if (config.value.data.length > 1) {
     config.value.data.splice(tableIndex, 1);

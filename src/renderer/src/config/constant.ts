@@ -1,6 +1,7 @@
 export const _layout = {
     asideWidth:'200px'
 }
+export const defaultPageLabel='introduce'
 
 export const _mainTemplateTypeOption = [{ label: '默认', value: 'default' }]
 export const _preloadTemplateTypeOption = [{ label: '默认', value: 'default' }];

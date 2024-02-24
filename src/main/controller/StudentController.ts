@@ -2,7 +2,7 @@ import { ipcMain } from "electron";
 
 class StudentController {
     studentService
-    constructor(data) {
+    constructor(data:any) {
         this.studentService = data.studentService;
         this.init();
     }
